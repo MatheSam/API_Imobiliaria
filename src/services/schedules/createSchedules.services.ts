@@ -34,7 +34,7 @@ export const createSchedulesServices = async ({
     throw new AppError("User schedule already exists", 400);
   }
 
-  if (+hour.split(":")[0] < 8 || +hour.split(":")[0] > 18) {
+  if (+hour.split(":")[0] < 8 || +hour.split(":")[0] >= 18) {
     throw new AppError("Invalid hour", 400);
   }
 
