@@ -16,11 +16,12 @@ export const createSchedulesServices = async ({
   const usersRepository = AppDataSource.getRepository(Users);
 
   const properties = await propertyRepository.findOneBy({ id: propertyId });
-  const users = await usersRepository.findOneBy({ id: userId });
 
-  if (!properties) {
+  if (!properties || !propertyId) {
     throw new AppError("Property not found", 404);
   }
+
+  const users = await usersRepository.findOneBy({ id: userId });
 
   const propertiScheduled = await schedulesRepository.find({
     relations: { properties: true },
